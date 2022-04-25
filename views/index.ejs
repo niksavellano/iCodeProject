@@ -1,27 +1,17 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Coffee | <%= title %></title>
+   <%- include("./partials/head.ejs") %>
   </head>
   <body>
-    <nav>
-      <div class="site-title">
-        <a href="/">Project Coffee</a>
-      </div>
-      <ul>
-        <li><a href="/">NewsFeed</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/create-post">Post Coffee</a></li>
-      </ul>
-    </nav>
+    <%- include("./partials/nav.ejs") %>
     <div class="posts content">
       <h2>All Posts</h2>
-      <% posts.forEach(post => { %>
+      <% if (posts.length > 0) { %> <% posts.forEach(post => { %>
       <h3><%= post.title %></h3>
       <p><%= post.snippet %></p>
-      <% }) %>
+      <% }) %> <% } else { %>
+      <p>There are no posts to display ....</p>
+      <% } %>
     </div>
+    <%- include('./partials/footer.ejs') %>
   </body>
 </html>

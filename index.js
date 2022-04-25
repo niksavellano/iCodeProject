@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
   ];
 
   let tagline = "putangina";
-  res.render("index", { posts: posts, title: "Home" });
+  res.render("index", { posts, title: "Home" });
 });
 
 app.get("/about", (req, res) => {
