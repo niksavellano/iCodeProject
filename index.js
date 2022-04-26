@@ -8,6 +8,7 @@ const app = express();
 app.use(morgan("dev"));
 app.use(express.static("public"));
 const mongoose = require("mongoose");
+const { render } = require("express/lib/response");
 app.use(express.urlencoded({ extended: true }));
 
 mongoose
@@ -21,21 +22,6 @@ mongoose
 
 app.set("view engine", "ejs");
 
-// app.get("/add-post", (req, res) => {
-//   const posts = new Posts({
-//     title: "new post",
-//     snippet: "about my new post",
-//     body: "more about my new post",
-//   });
-//   posts
-//     .save()
-//     .then((result) => {
-//       res.send(result);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// });
 app.post("/create-posts", (req, res) => {
   console.log(req.body);
   const posst = new Posts(req.body);
@@ -44,6 +30,24 @@ app.post("/create-posts", (req, res) => {
     .save()
     .then((result) => {
       res.redirect("/");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+app.get("/posts/:id", (req, res) => {
+  const id = req.params.id;
+  Posts.findById(id).then((result) => {
+    res.render("details", { post: result });
+  });
+});
+
+app.delete("/posts/:id", (req, res) => {
+  const id = req.params.id;
+  Posts.findByIdAndDelete(id)
+    .then((result) => {
+      res.json({ redirect: "/" });
     })
     .catch((err) => {
       console.log(err);
@@ -61,9 +65,11 @@ app.get("/all-posts", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  Posts.find().then((result) => {
-    res.render("index", { posts: result, title: "Home" });
-  });
+  Posts.find()
+    .sort({ createdAt: -1 })
+    .then((result) => {
+      res.render("index", { posts: result, title: "Home" });
+    });
 });
 
 app.get("/about", (req, res) => {

@@ -3,11 +3,13 @@
   </head>
   <body>
     <%- include("./partials/nav.ejs") %>
-    <div class="posts content">
+    <div class="blogs content">
       <h2>All Posts</h2>
       <% if (posts.length > 0) { %> <% posts.forEach(post => { %>
+       <a href="/posts/<%= post._id %> " class="single">
       <h3><%= post.title %></h3>
       <p><%= post.snippet %></p>
+      </a>
       <% }) %> <% } else { %>
       <p>There are no posts to display ....</p>
       <% } %>

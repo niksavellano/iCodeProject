@@ -1,0 +1,33 @@
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <link
+    rel="stylesheet"
+    href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+  />
+  <body>
+    <%- include("./partials/nav.ejs") %>
+    <div class="details content">
+      <h2><%= post.title %></h2>
+      <div class="content">
+        <p><%= post.body %></p>
+      </div>
+      <a class="delete material-symbols-outlined" data-doc="<%= post._id %>"
+        >delete</a
+      >
+    </div>
+    <%- include('./partials/footer.ejs') %>
+    <script>
+      const deleteData = document.querySelector("a.delete");
+      deleteData.addEventListener("click", (e) => {
+        const endpoint = `/posts/${deleteData.dataset.doc}`;
+
+        fetch(endpoint, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((data) => (window.location.href = data.redirect))
+          .catch((err) => console.log(err));
+      });
+    </script>
+  </body>
+</html>
