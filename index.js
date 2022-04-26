@@ -1,21 +1,69 @@
 const express = require("express");
 const morgan = require("morgan");
+const dbURI = "mongodb+srv://root:mongo@cluster0.vvw84.mongodb.net/test";
+const Posts = require("./models/post");
 
 const app = express();
 
-// app.use(morgan());
+app.use(morgan("dev"));
+app.use(express.static("public"));
+const mongoose = require("mongoose");
+app.use(express.urlencoded({ extended: true }));
+
+mongoose
+  .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then((result) => {
+    console.log("connected to db");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 app.set("view engine", "ejs");
 
-app.get("/", (req, res) => {
-  let posts = [
-    { title: "Title 1", snippet: "Title 1 Snippet" },
-    { title: "Title 2", snippet: "Title 2 Snippet" },
-    { title: "Title 3", snippet: "Title 3 Snippet" },
-  ];
+// app.get("/add-post", (req, res) => {
+//   const posts = new Posts({
+//     title: "new post",
+//     snippet: "about my new post",
+//     body: "more about my new post",
+//   });
+//   posts
+//     .save()
+//     .then((result) => {
+//       res.send(result);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
+app.post("/create-posts", (req, res) => {
+  console.log(req.body);
+  const posst = new Posts(req.body);
 
-  let tagline = "putangina";
-  res.render("index", { posts, title: "Home" });
+  posst
+    .save()
+    .then((result) => {
+      res.redirect("/");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+app.get("/all-posts", (req, res) => {
+  Posts.find()
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+app.get("/", (req, res) => {
+  Posts.find().then((result) => {
+    res.render("index", { posts: result, title: "Home" });
+  });
 });
 
 app.get("/about", (req, res) => {

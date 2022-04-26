@@ -2,8 +2,16 @@
   <%- include("./partials/head.ejs") %>
   <body>
     <%- include('./partials/nav.ejs') %>
-    <div class="posts content">
-      <h2>posts</h2>
+    <div class="create-blog content">
+      <form action="/create-posts" method="post">
+        <label for="title">Post Title:</label>
+        <input type="text" id="title" name="title" required />
+        <label for="snippet">Post snippet:</label>
+        <input type="text" id="snippet" name="snippet" required />
+        <label for="body">Post body:</label>
+        <textarea id="body" name="body" required></textarea>
+        <button>Submit</button>
+      </form>
     </div>
     <%- include('./partials/footer.ejs') %>
   </body>
