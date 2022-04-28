@@ -85,8 +85,8 @@ h3 {
 }
 .delete:hover {
   cursor: pointer;
-  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
   background-color: crimson;
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* create styles */
