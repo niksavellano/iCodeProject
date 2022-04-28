@@ -23,7 +23,7 @@ const postCreatePost = (req, res) => {
 const postGetOne = (req, res) => {
   const id = req.params.id;
   Posts.findById(id).then((result) => {
-    res.render("details", { post: result });
+    res.render("details", { post: result, title: "Home" });
   });
 };
 

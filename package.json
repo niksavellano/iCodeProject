@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage": "http://niksavellano.github.io/iCodeProject",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +15,7 @@
   "dependencies": {
     "ejs": "^3.1.7",
     "express": "^4.17.3",
+    "gh-pages": "^3.2.3",
     "mongoose": "^6.3.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15"
