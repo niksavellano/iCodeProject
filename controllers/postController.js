@@ -10,6 +10,7 @@ const postIndex = (req, res) => {
 
 const postCreatePost = (req, res) => {
   const posst = new Posts(req.body);
+  console.log(req.body);
   posst
     .save()
     .then((result) => {
