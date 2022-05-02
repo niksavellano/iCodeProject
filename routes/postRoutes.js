@@ -11,6 +11,9 @@ router.get("/about", postController.about);
 // Create Post page
 router.get("/create-post", postController.createPage);
 
+//Store page
+router.get("/store", postController.store);
+
 router.post("/create-posts", postController.postCreatePost);
 
 router.get("/posts/:id", postController.postGetOne);

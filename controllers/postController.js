@@ -11,6 +11,9 @@ const postIndex = (req, res) => {
 const postCreatePost = (req, res) => {
   const posst = new Posts(req.body);
   console.log(req.body);
+  if (req.file) {
+    posst.insertImg = req.file.path;
+  }
   posst
     .save()
     .then((result) => {
@@ -56,6 +59,9 @@ const about = (req, res) => {
 const createPage = (req, res) => {
   res.render("posts", { title: "Create Post" });
 };
+const store = (req, res) => {
+  res.render("storeCoffee", { title: "Store" });
+};
 
 const page404 = (req, res) => {
   res.status(404).render("404");
@@ -70,4 +76,5 @@ module.exports = {
   about,
   createPage,
   page404,
+  store,
 };

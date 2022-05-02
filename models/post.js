@@ -7,6 +7,9 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
+    insertImg: {
+      type: String,
+    },
     snippet: {
       type: String,
       required: true,

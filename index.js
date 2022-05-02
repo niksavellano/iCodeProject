@@ -2,10 +2,13 @@ const express = require("express");
 const morgan = require("morgan");
 const dbURI = "mongodb+srv://root:mongo@cluster0.vvw84.mongodb.net/test";
 
+const upload = require("express-fileupload");
+
 const app = express();
 
 app.use(morgan("dev"));
 app.use(express.static("public"));
+app.use(upload());
 const mongoose = require("mongoose");
 const postRoutes = require("./routes/postRoutes");
 
