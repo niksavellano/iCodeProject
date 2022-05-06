@@ -7,8 +7,10 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
-    insertImg: {
+    img: {
+      data: Buffer,
       type: String,
+      default: "placeholder.jpg",
     },
     snippet: {
       type: String,

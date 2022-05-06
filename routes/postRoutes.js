@@ -1,6 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const postController = require("../controllers/postController");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "uploads");
+  },
+
+  filename: (req, file, callback) => {
+    callback(null, Date.now() + file.originalname);
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1024 * 1024 * 3,
+  },
+});
 
 //Home page
 router.get("/", postController.postIndex);
@@ -14,7 +32,11 @@ router.get("/create-post", postController.createPage);
 //Store page
 router.get("/store", postController.store);
 
-router.post("/create-posts", postController.postCreatePost);
+router.post(
+  "/create-posts",
+  upload.single("image"),
+  postController.postCreatePost
+);
 
 router.get("/posts/:id", postController.postGetOne);
 

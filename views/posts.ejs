@@ -3,14 +3,14 @@
   <body>
     <%- include('./partials/nav.ejs') %>
     <div class="create-blog content">
-      <form action="/create-posts" method="post">
+      <form action="/create-posts" method="post" enctype="multipart/form-data">
         <label for="title">Post Title:</label>
         <input type="text" id="title" name="title" required />
-        <label for="insertImg">Insert Image:</label>
+        <label for="image">Insert Image:</label>
         <input
           type="file"
-          id="insertImage"
-          name="insertImage"
+          id="image"
+          name="image"
           class="custom-file-input"
           required
         />
