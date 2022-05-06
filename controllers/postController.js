@@ -12,7 +12,7 @@ const postCreatePost = (req, res) => {
   const posst = new Posts(req.body);
   console.log(req.body);
   if (req.file) {
-    posst.img = req.file.path;
+    posst.img = req.file.filename;
   }
   posst
     .save()
