@@ -4,7 +4,7 @@
     <%- include('./partials/nav.ejs') %>
     <div class="create-blog content">
       <form action="/create-posts" method="post" enctype="multipart/form-data">
-        <label for="title">Post Title:</label>
+        <label for="title">Title:</label>
         <input type="text" id="title" name="title" required />
         <label for="image">Insert Image:</label>
         <input
@@ -14,9 +14,9 @@
           class="custom-file-input"
           required
         />
-        <label for="snippet">Post snippet:</label>
+        <label for="snippet">Snippet:</label>
         <input type="text" id="snippet" name="snippet" required />
-        <label for="body">Post body:</label>
+        <label for="body">Description:</label>
         <textarea id="body" name="body" required></textarea>
         <button>Submit</button>
       </form>
